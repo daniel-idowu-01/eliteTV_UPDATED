@@ -27,12 +27,14 @@ const Nav = () => {
 
               <input 
               type='text'
+              name='movie'
               placeholder='Search movie...'
               onChange={(e) => setMovieName(e.target.value)}
               className={searchInputStyle}
               />
 
               <button
+               type='submit'
                className={btnStyle}
                onClick={handleNavigate}>
                 Search

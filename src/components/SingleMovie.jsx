@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import YouTube from 'react-youtube';
+import { Link } from 'react-router-dom';
 import ClipLoader from "react-spinners/ClipLoader";
 
 const SingleMovie = () => {
@@ -8,6 +8,7 @@ const SingleMovie = () => {
     const [eachMovie, setEachMovie] = useState([])
     const [prodCompany, setProdCompany] = useState([])
     const [video, setVideo] = useState([])
+    const [reviews, setReviews] = useState([])
     const [isLoading, setIsLoading] = useState(false);
     const { movieId } = useParams();
 
@@ -31,14 +32,20 @@ const SingleMovie = () => {
 
         // api for the youtube video of the movie
         const fetchVideo = async () => {
-            const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`, options_2)
+            const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`, options)
             const data = await response.json()
             setVideo(data.results[0])
         }
-        fetchVideo()
+        fetchVideo();
+          
+        // api for the reviews of the movie
+        const fetchReviews = async () => {
+            const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/reviews?language=en-US&page=1`, options)
+            const data = await response.json()
+            setReviews(data.results)
+        }
+        fetchReviews();
     }, [])
-
-    console.log(video)
 
     
     // used in the API calling
@@ -50,13 +57,16 @@ const SingleMovie = () => {
         }
     };
 
-    const options_2 = {
-        method: 'GET',
-        headers: {
-          accept: 'application/json',
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjY0MWEwMDMyN2MzNjNiNDVmYTA0NzgyMDdkNTliMCIsInN1YiI6IjY0MWRmYWZhMzQ0YThlMDBmODc3MzhiMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.JVDP22nkAFa9FmfS4iazy2aGqh6qxV7GANq7_TqPUqI'
+    // to change the colors of the ratings
+    const setVoteClass = (vote) => {
+        if (vote >= 7) {
+        return "text-green-500";
+        } else if (vote >= 5) {
+        return "text-orange-500";
+        } else {
+        return "text-red-500";
         }
-      };
+    };
 
       // function when API is set to loading
     if(isLoading) {
@@ -68,10 +78,17 @@ const SingleMovie = () => {
                     />
                 </div>
     }
+
+    console.log(eachMovie)
       
   return (
     <section className='px-5 md:px-14 py-10'>
-        <article className='flex flex-col md:flex-row justify-items-stretch gap-10 md:gap-20'>
+        <Link to='/search'>
+            <span className="material-symbols-outlined opacity-50">
+                arrow_back
+            </span>
+        </Link>
+        <article className='flex flex-col md:flex-row justify-items-stretch gap-20 md:gap-20'>
             {/* Movie Image */}
             <img
                 src=
@@ -98,23 +115,29 @@ const SingleMovie = () => {
                 <p className='w-fit px-2 border-l-2 border-gold'>MOVIE INFO</p>
                 <p className='text-xl text-justify'>{eachMovie.overview}</p>
                 <article>
+                    {/* <p>Genre: {eachMovie.genres.map((genre) => <span>{genre.name} </span>)}</p> */}
                     <p>Original Language: {eachMovie.original_language}</p>
                     <p>Runtime: <span>{eachMovie.runtime} minutes</span></p>
                     <p>Release Date: <span>{eachMovie.release_date}</span></p>
+                    <p>Rating: 
+                         <span className={`${setVoteClass(eachMovie.vote_average)}`}>
+                            {' ' + eachMovie.vote_average}
+                        </span>
+                    </p>
                 </article>
                 <p>Production Companies: </p>
-                <div className='grid grid-cols-3 place-items-center gap-5 relative top-5'>
-                    { prodCompany.map((company) => (
-                        <div key={company.id} className='w-20'>  
+                <div className=' grid grid-cols-2 md:grid-cols-3 place-items-center mb-24 md:mb-0'>
+                    { prodCompany ? prodCompany.map((company) => (
+                        <div key={company.id} className='border border-gold h-full w-full p-10'>  
                             <img src={API_IMG + company.logo_path} alt="" />
                         </div>
-                    ))}
+                    )) : ''}
                 </div>
             </div>
         </article>
 
         {/* Movie Video */}
-        <div className="relative top-10">
+        <div className="relative top-10 mb-20">
             <iframe
                 className="w-full"
                 height="500"
@@ -123,6 +146,31 @@ const SingleMovie = () => {
             >  
             </iframe>
         </div>
+        
+        {/* Movie Reviews */}
+        <section className="">
+            <p className='w-fit px-2 border-l-2 border-gold'>REVIEWS</p>
+            <div className='mb-5'></div> {/* The div is used to space the reviews from the review header */}
+            {reviews ? reviews.map((review) => (
+                <article className='flex items-start gap-2'>
+                    {/* Each review content */}
+                    <img
+                     className='rounded-full h-10 w-10 p-0 m-0' 
+                     src={
+                        review.author_details.avatar_path 
+                        ?
+                        API_IMG + review.author_details.avatar_path
+                         : 
+                        "https://th.bing.com/th?id=OIP.xo-BCC1ZKFpLL65D93eHcgHaGe&w=210&h=183&c=8&rs=1&qlt=30&o=6&pid=3.1&rm=2"}
+                         alt=""
+                    />
+                    <div key={review.id} className='my-2 text-justify'>
+                        <p className='font-semibold'>{review.author_details.name ? review.author_details.name : 'N/A'}</p>
+                        <p>{review.content}</p>
+                    </div>
+                </article>
+            )) : <p>No reviews</p>}
+        </section>
        
     </section>
   )
