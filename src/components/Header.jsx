@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import DrStrange from '../images/img-1.png'
 import DrStrange2 from '../images/img-2.png'
 // Import Swiper React components
@@ -14,7 +14,7 @@ const Header = () => {
 
   const headerStyle = 'flex flex-col md:flex-row justify-between items-center gap-10 px-5 md:px-14 pt-10 pb-20'
   const btnStyle = 'bg-gold p-2 md:px-5 text-black w-1/2 md:w-1/4'
-  const swiperImageStyle = 'w-full h-1/4 p-5'
+  const swiperImageStyle = 'w-full h-1/4'
 
   return (
     <section className={headerStyle}>   
@@ -36,7 +36,7 @@ const Header = () => {
       navigation
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
-      className='border-2 border-gold w-full md:w-1/3  h-2/3'
+      className='border-2 border-gold w-full md:w-1/3 h-2/3'
       >
       <SwiperSlide>
         <img src={DrStrange} alt="" className={swiperImageStyle} />

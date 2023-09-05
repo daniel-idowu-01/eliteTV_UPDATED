@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const SearchContext = createContext();
 
@@ -6,6 +7,7 @@ export function SearchProvider({ children }) {
 
     const[movieName, setMovieName] = useState('')
     const [movies, setMovies] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
     const API_URL = `https://api.themoviedb.org/3/search/movie?query=${movieName}&include_adult=false&language=en-US&page=1`
     
     // to get API when search button is clicked (to search for movies)
@@ -20,15 +22,32 @@ export function SearchProvider({ children }) {
             }
           };
     
+        setIsLoading(true)
         fetch(API_URL, options)
         .then(response => response.json())
-        .then(data => setMovies(data.results))
-        .catch(err => console.error(err));    
-
+        .then(data => {
+          setIsLoading(false)
+          setMovies(data.results)
+        })
+        .catch(err => {
+          setIsLoading(false)
+          console.error(err)
+        });    
       }
+
+      // function when API is set to loading
+    if(isLoading) {
+      return <div className="flex justify-center items-center h-screen">
+            <ClipLoader
+              color={'#FFD700'}
+              loading={isLoading}
+              size={30}
+          />
+        </div>
+    }
     
     return (
-        <SearchContext.Provider value={{handleSubmit, movies, setMovieName}}>
+        <SearchContext.Provider value={{handleSubmit, movies, setMovieName, isLoading}}>
             {children}
         </SearchContext.Provider>
     )

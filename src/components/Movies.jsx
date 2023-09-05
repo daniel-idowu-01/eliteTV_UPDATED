@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import MovieCard from './MovieCard'
 import genreData from '../data/genreData.json'
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Movies = () => {
-
   
     const [activeNav, setActiveNav] = useState('#');
     const [allMovies, setAllMovies] = useState([]);
@@ -34,13 +35,6 @@ const Movies = () => {
         Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjY0MWEwMDMyN2MzNjNiNDVmYTA0NzgyMDdkNTliMCIsInN1YiI6IjY0MWRmYWZhMzQ0YThlMDBmODc3MzhiMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.JVDP22nkAFa9FmfS4iazy2aGqh6qxV7GANq7_TqPUqI'
       }
     };
-
-    // function when API is set to loading
-    if(isLoading) {
-      return <p>Loading...</p>
-    }
-
-
 
     //////////////////////////////
 
@@ -96,7 +90,17 @@ const Movies = () => {
       setSelectedGenreIds([16])
     }
     
-
+    // function when API is set to loading
+    if(isLoading) {
+      return <div className="flex justify-center items-center h-screen">
+              <ClipLoader
+                color={'#FFD700'}
+                loading={isLoading}
+                size={30}
+            />
+  </div>
+    }
+    
   return (
     <section className=''>
         {/* Links to show the movies selected */}
@@ -138,7 +142,9 @@ const Movies = () => {
         <div className={moviesContainer}>
           {
             moviesWithGenreNames.map((result) => (
-              <MovieCard key={result.id} {...result} />
+              <Link to={`/search/${result.id}`} key={result.id}>
+                <MovieCard {...result} />
+              </Link>
             ))
           }
         </div>

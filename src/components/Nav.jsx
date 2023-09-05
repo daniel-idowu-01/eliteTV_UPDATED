@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import SearchContext from '../data/SearchContext'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 const Nav = () => {
@@ -8,6 +8,11 @@ const Nav = () => {
   const {handleSubmit, setMovieName} = useContext(SearchContext)
   const btnStyle = 'bg-gold p-2 md:px-5 text-black'
   const searchInputStyle = 'p-2 w-32 md:w-72 outline-none text-black rounded-none'
+  const navigate = useNavigate()
+
+  const handleNavigate = () => {
+    navigate('/search')
+  }
 
   return (
     <nav className='flex justify-between items-center p-5 md:py-7 md:px-14'>
@@ -19,19 +24,23 @@ const Nav = () => {
         <div
         className='flex gap-5 md:gap-10 items-center'>
             <form onSubmit={handleSubmit}>
+
               <input 
               type='text'
               placeholder='Search movie...'
               onChange={(e) => setMovieName(e.target.value)}
               className={searchInputStyle}
               />
+
               <button
-               className={btnStyle}>
+               className={btnStyle}
+               onClick={handleNavigate}>
                 Search
               </button>
+              
             </form>
 
-            <Link to='/search'> <button className={btnStyle}>Login</button> </Link>
+            <Link to='/login'> <button className={btnStyle}>Login</button> </Link>
         </div>
    </nav>
   )
