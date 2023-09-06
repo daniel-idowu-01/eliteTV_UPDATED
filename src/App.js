@@ -1,5 +1,6 @@
 import React from 'react'
 import Login from './pages/Login';
+import SignUp from './pages/SignUp';
 import Navbar from './components/Nav';
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
@@ -28,6 +29,7 @@ function App() {
         <Routes>
           <Route path='/' element={ <HomePage /> } />
           <Route path='/login' element={ <Login /> } />
+          <Route path='/signup' element={ <SignUp /> } />
           <Route path='/search' element={ <SearchPage /> } />
           <Route path='/search/:movieId' element={ <SingleMovie /> } />
         </Routes>

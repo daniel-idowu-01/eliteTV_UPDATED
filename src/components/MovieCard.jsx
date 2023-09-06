@@ -2,7 +2,7 @@ import React from 'react'
 
 const MovieCard = ({ title, poster_path, vote_average}) => {
 
-    // API to get movie image
+  // API to get movie image
   const API_IMG = 'https://image.tmdb.org/t/p/w500/'
 
   // to change the colors of the ratings

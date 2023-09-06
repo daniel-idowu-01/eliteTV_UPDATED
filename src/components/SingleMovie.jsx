@@ -47,7 +47,6 @@ const SingleMovie = () => {
         fetchReviews();
     }, [])
 
-    
     // used in the API calling
     const options = {
         method: 'GET',
@@ -79,8 +78,8 @@ const SingleMovie = () => {
                 </div>
     }
 
-    console.log(eachMovie)
-      
+    console.log(video)
+
   return (
     <section className='px-5 md:px-14 py-10'>
         <Link to='/search'>
@@ -127,7 +126,7 @@ const SingleMovie = () => {
                 </article>
                 <p>Production Companies: </p>
                 <div className=' grid grid-cols-2 md:grid-cols-3 place-items-center mb-24 md:mb-0'>
-                    { prodCompany ? prodCompany.map((company) => (
+                    { prodCompany.length > 0 ? prodCompany.map((company) => (
                         <div key={company.id} className='border border-gold h-full w-full p-10'>  
                             <img src={API_IMG + company.logo_path} alt="" />
                         </div>
@@ -138,13 +137,23 @@ const SingleMovie = () => {
 
         {/* Movie Video */}
         <div className="relative top-10 mb-20">
+            { video === undefined 
+                ? 
             <iframe
                 className="w-full"
                 height="500"
-                src={`https://www.youtube.com/embed/${video.key}`}
+                src='https://www.youtube.com/watch?v=yhtl5fqJIMw'
                 allowFullScreen
             >  
-            </iframe>
+            </iframe> 
+                : 
+            <iframe
+            className="w-full"
+            height="500"
+            src={`https://www.youtube.com/embed/${video.key}`}
+            allowFullScreen
+        >  
+        </iframe> }
         </div>
         
         {/* Movie Reviews */}
@@ -152,7 +161,7 @@ const SingleMovie = () => {
             <p className='w-fit px-2 border-l-2 border-gold'>REVIEWS</p>
             <div className='mb-5'></div> {/* The div is used to space the reviews from the review header */}
             {reviews ? reviews.map((review) => (
-                <article className='flex items-start gap-2'>
+                <article className='flex items-start gap-2' key={review.id}>
                     {/* Each review content */}
                     <img
                      className='rounded-full h-10 w-10 p-0 m-0' 

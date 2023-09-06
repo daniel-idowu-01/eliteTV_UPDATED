@@ -98,9 +98,10 @@ const Movies = () => {
                 loading={isLoading}
                 size={30}
             />
-  </div>
+      </div>
     }
     
+    console.log(moviesWithGenreNames)
   return (
     <section className=''>
         {/* Links to show the movies selected */}
@@ -141,11 +142,14 @@ const Movies = () => {
         {/* Movies to show based on the links clicked */}
         <div className={moviesContainer}>
           {
-            moviesWithGenreNames.map((result) => (
-              <Link to={`/search/${result.id}`} key={result.id}>
-                <MovieCard {...result} />
-              </Link>
-            ))
+            moviesWithGenreNames.map((result) => {
+              if(result.title){
+                return <Link to={`/search/${result.id}`} key={result.id}>
+                  <MovieCard {...result} />
+                </Link>
+              }
+              
+            })
           }
         </div>
     </section>
