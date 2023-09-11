@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import ClipLoader from "react-spinners/ClipLoader";
+import MoviesContext from '../data/MovieContext';
 
 const SingleMovie = () => {
 
@@ -10,6 +11,7 @@ const SingleMovie = () => {
     const [video, setVideo] = useState([])
     const [reviews, setReviews] = useState([])
     const [isLoading, setIsLoading] = useState(false);
+    const {addToMovies} = useContext(MoviesContext)
     const { movieId } = useParams();
 
     // API to get movie image
@@ -71,14 +73,12 @@ const SingleMovie = () => {
     if(isLoading) {
         return  <div className="flex justify-center items-center h-screen">
                     <ClipLoader
-                    color={'#FFD700'}
-                    loading={isLoading}
-                    size={30}
+                        color={'#FFD700'}
+                        loading={isLoading}
+                        size={30}
                     />
                 </div>
     }
-
-    console.log(video)
 
   return (
     <section className='px-5 md:px-14 py-10'>
@@ -114,7 +114,7 @@ const SingleMovie = () => {
                 <p className='w-fit px-2 border-l-2 border-gold'>MOVIE INFO</p>
                 <p className='text-xl text-justify'>{eachMovie.overview}</p>
                 <article>
-                    {/* <p>Genre: {eachMovie.genres.map((genre) => <span>{genre.name} </span>)}</p> */}
+                    <p>Genre: {eachMovie.genres !== undefined ? eachMovie.genres.map((genre) => <span>{genre.name} </span>) : <span>N/A</span>}</p>
                     <p>Original Language: {eachMovie.original_language}</p>
                     <p>Runtime: <span>{eachMovie.runtime} minutes</span></p>
                     <p>Release Date: <span>{eachMovie.release_date}</span></p>
@@ -132,6 +132,11 @@ const SingleMovie = () => {
                         </div>
                     )) : ''}
                 </div>
+                <button
+                    onClick={() => addToMovies(eachMovie.id, eachMovie.title, API_IMG + eachMovie.poster_path , eachMovie.vote_average)}
+                    className='w-1/4 bg-gold px-8 py-2 mt-8 text-black hover:opacity-75 hover:text-white'>
+                        Save Movie
+                </button>
             </div>
         </article>
 
@@ -160,9 +165,13 @@ const SingleMovie = () => {
         <section className="">
             <p className='w-fit px-2 border-l-2 border-gold'>REVIEWS</p>
             <div className='mb-5'></div> {/* The div is used to space the reviews from the review header */}
-            {reviews ? reviews.map((review) => (
+            {reviews.length === 0
+             ? 
+             <p>No reviews</p>
+              :
+              reviews.map((review) => (
                 <article className='flex items-start gap-2' key={review.id}>
-                    {/* Each review content */}
+                    {/* Each review c ontent */}
                     <img
                      className='rounded-full h-10 w-10 p-0 m-0' 
                      src={
@@ -178,7 +187,7 @@ const SingleMovie = () => {
                         <p>{review.content}</p>
                     </div>
                 </article>
-            )) : <p>No reviews</p>}
+            )) }
         </section>
        
     </section>

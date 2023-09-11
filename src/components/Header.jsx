@@ -78,23 +78,12 @@ const Header = () => {
       }}
       className='border-2 border-gold w-full md:w-1/3 h-2/3'
       >
-        {allMovies.map((movie) => (
-          <SwiperSlide>
+        {allMovies.map((movie, index) => (
+          <SwiperSlide key={index}>
             <img src={API_IMG + movie.poster_path} alt=''  className={swiperImageStyle} />
           </SwiperSlide>
         ))}
-      {/* <SwiperSlide>
-        <img src={DrStrange} alt="" className={swiperImageStyle} />
-      </SwiperSlide>
-
-      <SwiperSlide>
-        <img src={DrStrange2} alt="" className={swiperImageStyle} />
-      </SwiperSlide>
-
-      <SwiperSlide>
-        <img src={DrStrange} alt="" className={swiperImageStyle} />
-      </SwiperSlide>
- */}
+        
      </Swiper>     
     </section>
   )

@@ -4,8 +4,10 @@ import SignUp from './pages/SignUp';
 import Navbar from './components/Nav';
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
+import SavedMovies from './components/SavedMovies';
 import SingleMovie from './components/SingleMovie';
 import { Routes, Route } from 'react-router-dom';
+import { MoviesProvider } from './data/MovieContext';
 import { SearchProvider } from './data/SearchContext';
 
 function App() {
@@ -25,14 +27,17 @@ function App() {
   return (
     <div className='app bg-deepNavyBlue bg-opacity-90 text-white'>
       <SearchProvider>
-        <Navbar />
-        <Routes>
-          <Route path='/' element={ <HomePage /> } />
-          <Route path='/login' element={ <Login /> } />
-          <Route path='/signup' element={ <SignUp /> } />
-          <Route path='/search' element={ <SearchPage /> } />
-          <Route path='/search/:movieId' element={ <SingleMovie /> } />
-        </Routes>
+        <MoviesProvider>
+          <Navbar />
+          <Routes>
+            <Route path='/' element={ <HomePage /> } />
+            <Route path='/login' element={ <Login /> } />
+            <Route path='/signup' element={ <SignUp /> } />
+            <Route path='/savedmovies' element={ <SavedMovies /> } />
+            <Route path='/search' element={ <SearchPage /> } />
+            <Route path='/search/:movieId' element={ <SingleMovie /> } />
+          </Routes>
+        </MoviesProvider>
       </SearchProvider>
 
       <button

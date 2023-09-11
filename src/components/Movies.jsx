@@ -84,7 +84,7 @@ const Movies = () => {
       setSelectedGenreIds([27])
     }
 
-    // function when the action link is clicked
+    // function when the action link is clicked 
     const animationLink = () => {
       setActiveNav('#animation')
       setSelectedGenreIds([16])
@@ -101,9 +101,8 @@ const Movies = () => {
       </div>
     }
     
-    console.log(moviesWithGenreNames)
   return (
-    <section className=''>
+    <section className='' id='movies'>
         {/* Links to show the movies selected */}
         <div className='flex justify-evenly items-center px-5 md:px-14 py-10'>
             <p
