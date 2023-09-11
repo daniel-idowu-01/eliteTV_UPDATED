@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import ClipLoader from "react-spinners/ClipLoader";
 import MoviesContext from '../data/MovieContext';
+import Notification from './Notification';
 
 const SingleMovie = () => {
 
@@ -11,6 +12,7 @@ const SingleMovie = () => {
     const [video, setVideo] = useState([])
     const [reviews, setReviews] = useState([])
     const [isLoading, setIsLoading] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
     const {addToMovies} = useContext(MoviesContext)
     const { movieId } = useParams();
 
@@ -80,6 +82,11 @@ const SingleMovie = () => {
                 </div>
     }
 
+    const handleToMovies = () => {
+        addToMovies(eachMovie.id, eachMovie.title, API_IMG + eachMovie.poster_path , eachMovie.vote_average)
+        setIsVisible(true)
+    }
+
   return (
     <section className='px-5 md:px-14 py-10'>
         <Link to='/search'>
@@ -114,7 +121,7 @@ const SingleMovie = () => {
                 <p className='w-fit px-2 border-l-2 border-gold'>MOVIE INFO</p>
                 <p className='text-xl text-justify'>{eachMovie.overview}</p>
                 <article>
-                    <p>Genre: {eachMovie.genres !== undefined ? eachMovie.genres.map((genre) => <span>{genre.name} </span>) : <span>N/A</span>}</p>
+                    <p>Genre: {eachMovie.genres !== undefined ? eachMovie.genres.map((genre, index) => <span key={index}>{genre.name} </span>) : <span>N/A</span>}</p> {/* Bad line of code... will work on it later */}
                     <p>Original Language: {eachMovie.original_language}</p>
                     <p>Runtime: <span>{eachMovie.runtime} minutes</span></p>
                     <p>Release Date: <span>{eachMovie.release_date}</span></p>
@@ -133,8 +140,8 @@ const SingleMovie = () => {
                     )) : ''}
                 </div>
                 <button
-                    onClick={() => addToMovies(eachMovie.id, eachMovie.title, API_IMG + eachMovie.poster_path , eachMovie.vote_average)}
-                    className='w-1/4 bg-gold px-8 py-2 mt-8 text-black hover:opacity-75 hover:text-white'>
+                    onClick={handleToMovies}
+                    className='w-1/2 md:w-1/4 bg-gold px-8 py-2 mt-8 text-black hover:opacity-75 hover:text-white'>
                         Save Movie
                 </button>
             </div>
@@ -189,6 +196,8 @@ const SingleMovie = () => {
                 </article>
             )) }
         </section>
+
+        {isVisible ? <Notification product={eachMovie.title} /> : ''}
        
     </section>
   )

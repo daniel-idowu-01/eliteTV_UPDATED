@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import Notification from "../components/Notification";
 
  const MoviesContext = createContext({})
 

@@ -8,7 +8,8 @@ const SavedMovies = () => {
   const { items } = useContext(MoviesContext)
 
     return (
-      <div className='grid grid-cols-1 md:grid-cols-3 place-items-center gap-10 py-10 px-5 md:px-14'>
+      <div
+       className={`${items.length === 0 ? 'h-screen' : 'h-auto'} grid grid-cols-1 md:grid-cols-3 place-items-center gap-10 py-10 px-5 md:px-14`}>
             { items.length > 0
              ?
               items.map((item, index) => (
@@ -17,7 +18,7 @@ const SavedMovies = () => {
                 </Link>
               ))
             :
-            <p>There are no saved meal</p>
+            <p>There are no saved movies</p>
             }
       </div>
     );
