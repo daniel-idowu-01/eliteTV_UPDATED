@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import SearchContext from '../data/SearchContext'
 
 
-const Nav = () => {
+const Nav = ({ token }) => {
 
   const {handleSubmit, setMovieName} = useContext(SearchContext)
   const btnStyle = 'bg-gold p-2 md:px-5 text-black'
@@ -58,7 +58,7 @@ const Nav = () => {
                   Saved Movies
               </Link>
 
-              <Link to='/login'> <button className={`${btnStyle} hidden md:block`}>Login</button> </Link>
+              {token ? '' : <Link to='/login'> <button className={`${btnStyle} hidden md:block`}>Login</button> </Link>}
               {/* Hamburger Menu */}
               { sideBar ?
             <VscChromeClose className='text-2xl md:hidden cursor-pointer' onClick={showSideBar} />
@@ -84,7 +84,7 @@ const Nav = () => {
           Saved Movies
         </Link>
 
-        <div className='flex gap-3 justify-center'>
+        {token ? '' : <div className='flex gap-3 justify-center'>
           <Link
            to='/login'
            onClick={() => setShowSideBar(false)}     
@@ -102,7 +102,7 @@ const Nav = () => {
             Sign Up
             </button> 
           </Link>
-        </div>
+        </div>}
         
       </div>
        

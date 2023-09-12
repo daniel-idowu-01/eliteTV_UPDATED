@@ -1,112 +1,79 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { supabase } from '../client/client'
 
-function Copyright(props) {
+const Login = ({ setToken }) => {
+
+  const navigate = useNavigate()
+
+  const labelStyle = 'text-gray-600 font-bold inline-block pb-2'
+  const inputStyle = 'text-black border border-gray-400 focus:outline-slate-400 rounded-md w-full shadow-sm px-5 py-2'
+
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  })
+
+  // function to be handled when user inputs a value
+  const handleChange = (event) => {
+    setFormData((prevFormData) => {
+      return {
+        ...prevFormData,
+        [event.target.name]:event.target.value
+      }
+    })
+  }
+
+  // function to be handled when user submits the form
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: formData.email,
+        password: formData.password,
+      }
+    )
+    console.log(data)
+    setToken(data)
+    navigate('/')
+    } catch (error) {
+      alert(error)
+    }
+  }
+
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="/">
-        elitetv
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
+      <section className="h-screen flex items-center">
+        <article className="bg-white shadow-xl p-10 h-max mx-auto flex flex-col items-center">
+            <h1 className="text-xl text-black font-bold text-center pb-10">Sign in to your account</h1>
+            <form onSubmit={handleSubmit}>
+              <div className=" flex flex-col gap-4 text-sm">
+                  <div>
+                      <label
+                      className={labelStyle}
+                        for="email">Email</label>
+                      <input
+                      onChange={handleChange}
+                      className={inputStyle} type="email" name="email" placeholder="mehedi@jaman.com" />
+                  </div>
+                  <div>
+                      <label
+                      className={labelStyle}
+                        for="password">Password</label>
+                      <input
+                      onChange={handleChange}
+                      className={inputStyle} type="password" name="password" placeholder="******" />
+                  </div>
+                  <div>
+                      <input className="bg-deepNavyBlue w-full py-2 rounded-md text-white font-bold cursor-pointer" type="submit" value="Login" />
+                  </div>
+                  <p className='text-black'>Don't have an account? <Link to='/signup'>Sign Up</Link></p>
+              </div>
+            </form>
+            
+        </article>
+     </section>
+  )
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
-const defaultTheme = createTheme();
-
-export default function Login() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
-
-  return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs" sx={{height:'100vh'}}>
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Login
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2, backgroundColor: '#FFD700', color: 'black' }}
-            >
-              Login
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-        <Copyright sx={{ mt: 5 }} />
-      </Container>
-    </ThemeProvider>
-  );
-}
+export default Login
