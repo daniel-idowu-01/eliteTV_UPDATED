@@ -5,13 +5,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import SearchContext from '../data/SearchContext'
 
 
-const Nav = ({ token }) => {
+const Nav = ({ token, handleLogOut }) => {
 
   const {handleSubmit, setMovieName} = useContext(SearchContext)
   const btnStyle = 'bg-gold p-2 md:px-5 text-black'
   const searchInputStyle = 'p-2 w-32 md:w-72 outline-none text-black rounded-none'
-  const navigate = useNavigate()
+  const navigate = useNavigate(); 
 
+  // function to navigate to search page when user clicks search button
   const handleNavigate = () => {
     navigate('/search')
   }
@@ -58,7 +59,14 @@ const Nav = ({ token }) => {
                   Saved Movies
               </Link>
 
-              {token ? '' : <Link to='/login'> <button className={`${btnStyle} hidden md:block`}>Login</button> </Link>}
+              {
+              token
+               ?
+              <button onClick={handleLogOut} className={`${btnStyle} hidden md:block`}>Log out</button>
+               : 
+               <Link to='/login'> <button className={`${btnStyle} hidden md:block`}>Login</button> </Link>
+               }
+               
               {/* Hamburger Menu */}
               { sideBar ?
             <VscChromeClose className='text-2xl md:hidden cursor-pointer' onClick={showSideBar} />
@@ -84,7 +92,15 @@ const Nav = ({ token }) => {
           Saved Movies
         </Link>
 
-        {token ? '' : <div className='flex gap-3 justify-center'>
+        {token 
+         ?
+         <div className='flex gap-3 justify-center'>
+            <button onClick={handleLogOut} className={`${btnStyle} px-5`}>
+              Log out
+            </button>
+         </div>
+         : 
+        <div className='flex gap-3 justify-center'>
           <Link
            to='/login'
            onClick={() => setShowSideBar(false)}     

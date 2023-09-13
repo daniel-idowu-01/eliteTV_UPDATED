@@ -91,7 +91,9 @@ const SignUp = () => {
                   <div>
                       <input className="bg-deepNavyBlue w-full py-2 rounded-md text-white font-bold cursor-pointer" type="submit" value="Sign Up" />
                   </div>
-                  <p className='text-black'>Have an account? <Link to='/login'>Log In</Link></p>
+                  <p className='text-black'>
+                    Have an account? <Link to='/login' className='underline'>Log In</Link>
+                  </p>
               </div>
             </form>
             

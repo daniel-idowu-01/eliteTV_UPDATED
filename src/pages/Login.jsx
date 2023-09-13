@@ -34,7 +34,6 @@ const Login = ({ setToken }) => {
         password: formData.password,
       }
     )
-    console.log(data)
     setToken(data)
     navigate('/')
     } catch (error) {
@@ -67,7 +66,9 @@ const Login = ({ setToken }) => {
                   <div>
                       <input className="bg-deepNavyBlue w-full py-2 rounded-md text-white font-bold cursor-pointer" type="submit" value="Login" />
                   </div>
-                  <p className='text-black'>Don't have an account? <Link to='/signup'>Sign Up</Link></p>
+                  <p className='text-black'>
+                    Don't have an account? <Link to='/signup' className='underline'>Sign Up</Link>
+                  </p>
               </div>
             </form>
             

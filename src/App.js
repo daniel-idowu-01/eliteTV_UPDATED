@@ -29,6 +29,12 @@ function App() {
     }
   }, [])
 
+  // function to log user out
+  const handleLogOut = () => {
+    sessionStorage.removeItem('token');
+    navigate('/login')
+  }
+
   /* scroll to top action */
   const scrollToTop = () => {
     window.scrollTo(
@@ -45,7 +51,7 @@ function App() {
     <div className='app bg-deepNavyBlue bg-opacity-90 text-white'>
       <SearchProvider>
         <MoviesProvider>
-          <Navbar token={token} />
+          <Navbar token={token} handleLogOut={handleLogOut} />
           <Routes>
             <Route path='/' element={ <HomePage /> } />
             <Route path='/login' element={ <Login setToken={setToken} /> } />
