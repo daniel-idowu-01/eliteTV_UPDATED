@@ -59,7 +59,7 @@ const SignUp = () => {
                 <div>
                       <label
                        className={labelStyle}
-                        for="first_name">First Name</label>
+                       htmlFor="first_name">First Name</label>
                       <input
                        onChange={handleChange}
                        className={inputStyle} type="text" name="first_name" placeholder="John" />
@@ -67,7 +67,7 @@ const SignUp = () => {
                   <div>
                       <label
                        className={labelStyle}
-                        for="last_name">Last Name</label>
+                       htmlFor="last_name">Last Name</label>
                       <input
                        onChange={handleChange}
                        className={inputStyle} type="text" name="last_name" placeholder="Doe" />
@@ -75,7 +75,7 @@ const SignUp = () => {
                   <div>
                       <label
                        className={labelStyle}
-                        for="email">Email</label>
+                       htmlFor="email">Email</label>
                       <input
                        onChange={handleChange}
                        className={inputStyle} type="email" name="email" placeholder="johndoe36@gmail.com" />
@@ -83,7 +83,7 @@ const SignUp = () => {
                   <div>
                       <label
                        className={labelStyle}
-                        for="password">Password</label>
+                       htmlFor="password">Password</label>
                       <input
                        onChange={handleChange}
                        className={inputStyle} type="password" name="password" placeholder="******" />

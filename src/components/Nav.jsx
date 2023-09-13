@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FaBars } from "react-icons/fa"
 import { VscChromeClose } from "react-icons/vsc"
 import { Link, useNavigate } from 'react-router-dom'
@@ -7,10 +7,23 @@ import SearchContext from '../data/SearchContext'
 
 const Nav = ({ token, handleLogOut }) => {
 
+  const [removeKey, setRemoveKey] = useState(false)
   const {handleSubmit, setMovieName} = useContext(SearchContext)
   const btnStyle = 'bg-gold p-2 md:px-5 text-black'
   const searchInputStyle = 'p-2 w-32 md:w-72 outline-none text-black rounded-none'
   const navigate = useNavigate(); 
+
+  // to remove session key
+  useEffect(() => {
+    sessionStorage.removeItem('token')
+  }, [removeKey])
+
+  // function for removing session key (user log out)
+  const handleRemoveKey = () => {
+    setRemoveKey(true)
+    navigate('/login')
+    window.location.reload()
+  }
 
   // function to navigate to search page when user clicks search button
   const handleNavigate = () => {
@@ -62,7 +75,8 @@ const Nav = ({ token, handleLogOut }) => {
               {
               token
                ?
-              <button onClick={handleLogOut} className={`${btnStyle} hidden md:block`}>Log out</button>
+              <button onClick={handleRemoveKey}
+                 className={`${btnStyle} hidden md:block`}>Log out</button>
                : 
                <Link to='/login'> <button className={`${btnStyle} hidden md:block`}>Login</button> </Link>
                }
@@ -95,7 +109,7 @@ const Nav = ({ token, handleLogOut }) => {
         {token 
          ?
          <div className='flex gap-3 justify-center'>
-            <button onClick={handleLogOut} className={`${btnStyle} px-5`}>
+            <button onClick={handleRemoveKey} className={`${btnStyle} px-5`}>
               Log out
             </button>
          </div>
@@ -121,7 +135,6 @@ const Nav = ({ token, handleLogOut }) => {
         </div>}
         
       </div>
-       
    </nav>
   )
 }

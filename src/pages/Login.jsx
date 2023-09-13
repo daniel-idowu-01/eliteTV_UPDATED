@@ -50,7 +50,7 @@ const Login = ({ setToken }) => {
                   <div>
                       <label
                       className={labelStyle}
-                        for="email">Email</label>
+                        htmlFor="email">Email</label>
                       <input
                       onChange={handleChange}
                       className={inputStyle} type="email" name="email" placeholder="mehedi@jaman.com" />
@@ -58,7 +58,7 @@ const Login = ({ setToken }) => {
                   <div>
                       <label
                       className={labelStyle}
-                        for="password">Password</label>
+                      htmlFor="password">Password</label>
                       <input
                       onChange={handleChange}
                       className={inputStyle} type="password" name="password" placeholder="******" />
