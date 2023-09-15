@@ -3,94 +3,98 @@ import { AiOutlineCopyright } from 'react-icons/ai'
 
 const Footer = () => {
 
+    const linkStyle = 'flex items-center gap-1 hover:opacity-90'
+    const iconStyle = "material-symbols-outlined text-sm md:text-md"
+    const btnStyle = 'mx-auto md:w-1/6 bg-gold p-2 px-5 text-black hover:opacity-90'
+    const bgStyle = 'grid grid-cols-2 md:grid-cols-4 place-items-center text-sm md:text-md gap-20 md:gap-20'
     const footerStyle = 'flex flex-col gap-20 mt-32 px-5 md:px-0 py-10 border-t border-gold bg-black text-white'
 
   return (
     <section className={footerStyle}>
         
-        <button className='mx-auto  md:w-1/6 bg-gold p-2 px-5 text-black'>
+        <button className={btnStyle}>
             Login
         </button>
-        <article className='grid grid-cols-2 md:grid-cols-4 place-items-center text-sm md:text-md gap-20 md:gap-20'>
+        <article className={bgStyle}>
             <article className='flex flex-col gap-10'>
-                <a href="javascript:void(0)" className='flex items-center gap-1'>
+                <a href="javascript:void(0)" className={linkStyle}>
                     Help 
-                    <span className="material-symbols-outlined text-sm md:text-md">
+                    <span className={iconStyle}>
                         open_in_new
                     </span>
                 </a>
-                <a href="javascript:void(0)"  className='flex items-center gap-1'>
+                <a href="javascript:void(0)"  className={linkStyle}>
                     Investor Relations
-                    <span className="material-symbols-outlined text-sm md:text-md">
+                    <span className={iconStyle}>
                         open_in_new
                     </span>
                 </a>
-                <a href="javascript:void(0)"  className='flex items-center gap-1'>
+                <a href="javascript:void(0)"  className={linkStyle}>
                     About 
-                    <span className="material-symbols-outlined text-sm md:text-md">
+                    <span className={iconStyle}>
                         open_in_new
                     </span>
                 </a>
             </article>
 
             <article className='flex flex-col gap-10'>
-                <a href="javascript:void(0)"  className='flex items-center gap-1'>
+                <a href="javascript:void(0)"  className={linkStyle}>
                         Careers 
-                        <span className="material-symbols-outlined text-sm md:text-md">
+                        <span className={iconStyle}>
                             open_in_new
                         </span>
                     </a>
-                    <a href="javascript:void(0)"  className='flex items-center gap-1'>
+                    <a href="javascript:void(0)"  className={linkStyle}>
                         Terms Of Use 
-                        <span className="material-symbols-outlined text-sm md:text-md">
+                        <span className={iconStyle}>
                             open_in_new
                         </span>
                     </a>
-                    <a href="javascript:void(0)"  className='flex items-center gap-1'>
+                    <a href="javascript:void(0)"  className={linkStyle}>
                         Advertising 
-                        <span className="material-symbols-outlined text-sm md:text-md">
+                        <span className={iconStyle}>
                             open_in_new
                         </span>
                     </a>
             </article>
 
             <article className='flex flex-col gap-10'>
-                <a href="javascript:void(0)"  className='flex items-center gap-1'>
+                <a href="javascript:void(0)"  className={linkStyle}>
                     Contact Us 
-                    <span className="material-symbols-outlined text-sm md:text-md">
+                    <span className={iconStyle}>
                         open_in_new
                     </span>
                 </a>
-                <a href="javascript:void(0)"  className='flex items-center gap-1'>
+                <a href="javascript:void(0)"  className={linkStyle}>
                     Privacy Policy 
-                    <span className="material-symbols-outlined text-sm md:text-md">
+                    <span className={iconStyle}>
                         open_in_new
                     </span>
                 </a>
-                <a href="javascript:void(0)"  className='flex items-center gap-1'>
+                <a href="javascript:void(0)"  className={linkStyle}>
                     Legal Policy 
-                    <span className="material-symbols-outlined text-sm md:text-md">
+                    <span className={iconStyle}>
                         open_in_new
                     </span>
                 </a>
             </article>
 
             <article className='flex flex-col gap-10'>
-                <a href="javascript:void(0)"  className='flex items-center gap-1'>
+                <a href="javascript:void(0)"  className={linkStyle}>
                     Cookie Preferences 
-                    <span className="material-symbols-outlined text-sm md:text-md">
+                    <span className={iconStyle}>
                         open_in_new
                     </span>
                 </a>
-                <a href="javascript:void(0)"  className='flex items-center gap-1'>
+                <a href="javascript:void(0)"  className={linkStyle}>
                     FAQ 
-                    <span className="material-symbols-outlined text-sm md:text-md">
+                    <span className={iconStyle}>
                         open_in_new
                     </span>
                 </a>
-                <a href="javascript:void(0)"  className='flex items-center gap-1'>
+                <a href="javascript:void(0)"  className={linkStyle}>
                     Account 
-                    <span className="material-symbols-outlined text-sm md:text-md">
+                    <span className={iconStyle}>
                         open_in_new
                     </span>
                 </a>

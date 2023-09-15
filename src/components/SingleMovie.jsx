@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ClipLoader from "react-spinners/ClipLoader";
 import MoviesContext from '../data/MovieContext';
 import Notification from './Notification';
 
-const SingleMovie = () => {
+const SingleMovie = ({ token }) => {
 
     const [eachMovie, setEachMovie] = useState([])
     const [prodCompany, setProdCompany] = useState([])
@@ -15,6 +15,7 @@ const SingleMovie = () => {
     const [isVisible, setIsVisible] = useState(false);
     const {addToMovies} = useContext(MoviesContext)
     const { movieId } = useParams();
+    const navigate = useNavigate()
 
     // API to get movie image
     const API_IMG = 'https://image.tmdb.org/t/p/w500/'
@@ -83,8 +84,12 @@ const SingleMovie = () => {
     }
 
     const handleToMovies = () => {
-        addToMovies(eachMovie.id, eachMovie.title, API_IMG + eachMovie.poster_path , eachMovie.vote_average)
-        setIsVisible(true)
+        if(token){
+            addToMovies(eachMovie.id, eachMovie.title, API_IMG + eachMovie.poster_path , eachMovie.vote_average)
+            setIsVisible(true)
+        } else {
+            navigate('/login')
+        }   
     }
 
   return (

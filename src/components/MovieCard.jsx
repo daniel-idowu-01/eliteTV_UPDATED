@@ -19,6 +19,7 @@ const MovieCard = ({ title, poster_path, vote_average}) => {
   return (
     <article className='border-2 border-gold hover:cursor-pointer hover:scale-105 transition-all'>
       <img
+       loading='lazy'
        src=
         { 
          poster_path 

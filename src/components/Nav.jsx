@@ -9,7 +9,7 @@ const Nav = ({ token, handleLogOut }) => {
 
   const [removeKey, setRemoveKey] = useState(false)
   const {handleSubmit, setMovieName} = useContext(SearchContext)
-  const btnStyle = 'bg-gold p-2 md:px-5 text-black'
+  const btnStyle = 'bg-gold p-2 md:px-5 text-black hover:opacity-90'
   const searchInputStyle = 'p-2 w-32 md:w-72 outline-none text-black rounded-none'
   const navigate = useNavigate(); 
 
@@ -22,7 +22,7 @@ const Nav = ({ token, handleLogOut }) => {
   const handleRemoveKey = () => {
     setRemoveKey(true)
     navigate('/login')
-    window.location.reload()
+    setShowSideBar(false)
   }
 
   // function to navigate to search page when user clicks search button
@@ -30,6 +30,7 @@ const Nav = ({ token, handleLogOut }) => {
     navigate('/search')
   }
 
+  // sidebar
   const [sideBar, setShowSideBar] = useState(false)
   const sideBarStyle =  `${sideBar ? 'flex' : 'hidden'} md:hidden flex-col gap-10 text-center w-full transition-all shadow-md p-10`
 

@@ -14,7 +14,7 @@ const Header = () => {
   const [allMovies, setAllMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false); 
   const headerStyle = 'flex flex-col md:flex-row justify-between items-center gap-10 px-5 md:px-14 pt-10 pb-20'
-  const btnStyle = 'bg-gold p-2 md:px-5 text-black w-1/2 md:w-1/4'
+  const btnStyle = 'bg-gold p-2 md:px-5 text-black w-1/2 md:w-1/4 hover:opacity-90'
   const swiperImageStyle = 'w-full h-1/4'
 
   // API to get movie image
