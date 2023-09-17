@@ -8,16 +8,22 @@ const SearchPage = () => {
 
   // to get the movie array from the SearchContext
   const {movies} = useContext(SearchContext)
-  console.log(movies)
+  const containerStyle = `${movies.length === 0 ? 'h-screen' : 'h-auto'} flex justify-center items-center py-10 px-5 md:px-14`
+  
   return (
-    <section className={`${movies.length === 0 ? 'h-screen' : 'h-auto'} py-10 px-5 md:px-14`}>  
+    <section className={containerStyle}>  
+      {
+      movies.length === 0
+       ? 
+      <p className='opacity-50'>No movies searched for</p>
+       : 
       <div className='grid grid-cols-1 md:grid-cols-3 place-items-center gap-10'>
         {movies.map((movie) => (
           <Link to={`/search/${movie.id}`} key={movie.id}>
             <MovieCard  key={movie.id} {...movie}/>
           </Link>
         ))}
-      </div>
+      </div>}
       
     </section>
   )

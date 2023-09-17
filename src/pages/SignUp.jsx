@@ -7,6 +7,7 @@ const SignUp = () => {
   const navigate = useNavigate()
 
   const labelStyle = 'text-gray-600 font-bold inline-block pb-2'
+  const submitBtnStyle = 'bg-deepNavyBlue w-full py-2 rounded-md text-white font-bold cursor-pointer'
   const inputStyle = 'text-black border border-gray-400 focus:outline-slate-400 rounded-md w-full shadow-sm px-5 py-2'
 
   const [formData, setFormData] = useState({
@@ -89,7 +90,7 @@ const SignUp = () => {
                        className={inputStyle} type="password" name="password" placeholder="******" />
                   </div>
                   <div>
-                      <input className="bg-deepNavyBlue w-full py-2 rounded-md text-white font-bold cursor-pointer" type="submit" value="Sign Up" />
+                      <input className={submitBtnStyle} type="submit" value="Sign Up" />
                   </div>
                   <p className='text-black'>
                     Have an account? <Link to='/login' className='underline'>Log In</Link>

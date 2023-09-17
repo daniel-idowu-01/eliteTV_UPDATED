@@ -23,6 +23,7 @@ const Nav = ({ token, handleLogOut }) => {
     setRemoveKey(true)
     navigate('/login')
     setShowSideBar(false)
+    window.location.reload();
   }
 
   // function to navigate to search page when user clicks search button
