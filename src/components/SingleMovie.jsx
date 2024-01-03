@@ -152,8 +152,8 @@ const SingleMovie = ({ token }) => {
             </div>
         </article>
 
-        {/* Movie Video */}
-        <div className="relative top-10 mb-20">
+          {/* Movie Video */}
+          <div className="relative top-10 mb-20">
             { video === undefined 
                 ? 
             <iframe

@@ -1,34 +1,25 @@
-import React, { useEffect, useState } from 'react'
-import Login from './pages/Login';
-import SignUp from './pages/SignUp';
-import Navbar from './components/Nav';
-import HomePage from './pages/HomePage';
-import NotFound from './pages/NotFound';
-import SearchPage from './pages/SearchPage';
-import SavedMovies from './components/SavedMovies';
-import SingleMovie from './components/SingleMovie';
 import { Routes, Route } from 'react-router-dom';
-import { MoviesProvider } from './data/MovieContext';
-import { SearchProvider } from './data/SearchContext';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { MoviesProvider, SearchProvider } from './data';
+import { Nav, SavedMovies, SingleMovie } from './components';
+import { Login, SignUp, HomePage, NotFound, SearchPage } from './pages';
+
 
 function App() {
-
-  const navigate = useNavigate()
 
   // token we got from supabase is saved in the token state
   const [token, setToken] = useState(false)
   
   if(token) {
-    sessionStorage.setItem('token', JSON.stringify(token))
+    localStorage.setItem('token', JSON.stringify(token))
   }
 
   useEffect(() => {
-    if(sessionStorage.getItem('token')) {
-      let data = JSON.parse(sessionStorage.getItem('token'))
+    if(localStorage.getItem('token')) {
+      let data = JSON.parse(localStorage.getItem('token'))
       setToken(data)
     }
-  }, [token])
+  }, [])
 
   /* scroll to top action */
   const scrollToTop = () => {
@@ -46,7 +37,7 @@ function App() {
     <div className='app bg-deepNavyBlue bg-opacity-90 text-white'>
       <SearchProvider>
         <MoviesProvider>
-          <Navbar token={token} />
+          <Nav token={token} />
           <Routes>
             <Route path='/' element={ <HomePage /> } />
             <Route path='/login' element={ <Login setToken={setToken} /> } />

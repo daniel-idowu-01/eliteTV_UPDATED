@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { AiOutlineInfoCircle } from 'react-icons/ai'
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../client/client'
 
 const Login = ({ setToken }) => {
 
+  const [emailNotVerified, setEmailNotVerified] = useState(null)
   const navigate = useNavigate()
 
   const labelStyle = 'text-gray-600 font-bold inline-block pb-2'
@@ -36,8 +38,16 @@ const Login = ({ setToken }) => {
         password: formData.password,
       }
     )
+    
+    if(error) throw error
     setToken(data)
     navigate('/')
+
+    // Check if the user has verified their email
+    if (!data.email_verified) {
+      setEmailNotVerified(true)
+    }
+
     } catch (error) {
       alert(error)
     }
@@ -71,6 +81,13 @@ const Login = ({ setToken }) => {
                   <p className='text-black'>
                     Don't have an account? <Link to='/signup' className='underline'>Sign Up</Link>
                   </p>
+              {emailNotVerified
+               ? 
+              <p className='text-red-500'>
+                <AiOutlineInfoCircle className='inline-block' /> Email or Password is not correct 
+              </p>
+               : 
+              ''}
               </div>
             </form>
             

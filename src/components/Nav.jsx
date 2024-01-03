@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import SearchContext from '../data/SearchContext'
 
 
-const Nav = ({ token, handleLogOut }) => {
+const Nav = ({ token }) => {
 
   const [removeKey, setRemoveKey] = useState(false)
   const {handleSubmit, setMovieName} = useContext(SearchContext)
@@ -15,7 +15,7 @@ const Nav = ({ token, handleLogOut }) => {
 
   // to remove session key
   useEffect(() => {
-    sessionStorage.removeItem('token')
+    localStorage.removeItem('token')
   }, [removeKey])
 
   // function for removing session key (user log out)
@@ -42,7 +42,7 @@ const Nav = ({ token, handleLogOut }) => {
   return (
     <nav>
       <div className='flex justify-between items-center p-5 md:py-7 md:px-14'>
-        <Link to='/'>
+          <Link to='/'>
             <p className='text-xl md:text-4xl text-center text-gold font-semibold'>
               EliteTV
             </p>
