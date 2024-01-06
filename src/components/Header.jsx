@@ -9,6 +9,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
+import { Link } from 'react-router-dom';
+
 const Header = () => {
 
   const [allMovies, setAllMovies] = useState([]);
@@ -62,7 +64,11 @@ const Header = () => {
         <p className='md:w-11/12 text-lg md:text-xl'>
           EliteTV is a movie reviewing and recommendation platform that offers a variety of features. On this platform, users can read reviews of new and classic movies, different genre of movies, and add their favourite movies to their favourite movies page
         </p>
-        <button className={btnStyle}>Take A Seat</button>
+        <Link to='/all-movies'>
+          <button className={btnStyle}>
+            Take A Seat
+          </button>
+        </Link>
      </article>
 
      {/* Swipe container for the header images */}

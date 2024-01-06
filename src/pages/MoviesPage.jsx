@@ -6,8 +6,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 const MoviesPage = () => {
 
   const [allMovies, setAllMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false); 
-  const linkStyle = 'cursor-pointer transition-all'
+  const [isLoading, setIsLoading] = useState(false);
   const moviesContainer = 'grid grid-cols-1 md:grid-cols-3 place-items-center gap-10 py-10 px-5 md:px-14'
 
    useEffect(() => {
