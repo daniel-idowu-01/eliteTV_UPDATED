@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import React, { useEffect, useState } from 'react'
 import { MoviesProvider, SearchProvider } from './data';
 import { Nav, SavedMovies, SingleMovie } from './components';
-import { Login, SignUp, HomePage, NotFound, SearchPage } from './pages';
+import { Login, SignUp, HomePage, NotFound, SearchPage, MoviesPage } from './pages';
 
 
 function App() {
@@ -44,6 +44,7 @@ function App() {
             <Route path='/signup' element={ <SignUp /> } />
             <Route path='/savedmovies' element={ <SavedMovies /> }  />
             <Route path='/search' element={ <SearchPage /> } />
+            <Route path='/all-movies' element={ <MoviesPage /> } />
             <Route path='/search/:movieId' element={ <SingleMovie token={token} /> } />
 
             <Route path='*' element={ <NotFound /> } />

@@ -1,4 +1,4 @@
-  import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import MovieCard from './MovieCard'
 import genreData from '../data/genreData.json'
@@ -72,19 +72,19 @@ const Movies = () => {
       setSelectedGenreIds([28])
     }
 
-    // function when the action link is clicked
+    // function when the comedy link is clicked
     const comedyLink = () => {
       setActiveNav('#comedy')
       setSelectedGenreIds([35])
     }
 
-    // function when the action link is clicked
+    // function when the horror link is clicked
     const horrorLink = () => {
       setActiveNav('#horror')
       setSelectedGenreIds([27])
     }
 
-    // function when the action link is clicked 
+    // function when the animation link is clicked 
     const animationLink = () => {
       setActiveNav('#animation')
       setSelectedGenreIds([16])
