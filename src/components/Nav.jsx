@@ -49,7 +49,7 @@ const Nav = ({ token }) => {
           </Link>
           <div
           className='flex gap-5 md:gap-10 items-center'>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} className='flex items-center'>
                 <input 
                 type='text'
                 name='movie'
