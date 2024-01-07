@@ -11,7 +11,7 @@ const MoviesPage = () => {
 
    useEffect(() => {
       setIsLoading(true);
-      fetch('https://api.themoviedb.org/3/trending/all/day?language=en-US', options)
+      fetch('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc', options)
       .then(response => response.json())
       .then(data => {
         setIsLoading(false)
